@@ -5,6 +5,11 @@ USER_CREDITS = 0
 
 def main():
     print("-"*50, "Magic Number", "-"*50)
+    print(f"Your credits: {USER_CREDITS}\n")
+
+    if USER_CREDITS < 0:
+        print("You lost all your credits. Try again later :(")
+        exit()
 
     user_choice = menu()
 
@@ -33,12 +38,14 @@ def game():
         max_tries -= 1
         if max_tries == 0:
             print("You lost the game")
+            update_credits(-10)
             main()
 
         print(f"Wrong number. You have {max_tries} more tries.")
         user_number = get_user_number()
 
     print(f"You win! My number was {magic_number}")
+    update_credits(10)
     main()
 
 
@@ -51,7 +58,6 @@ def update_credits(value):
     global USER_CREDITS
     USER_CREDITS += value
 
-    print(f"Your credits: {USER_CREDITS}")
 
 if __name__ == '__main__':
     main()

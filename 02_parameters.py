@@ -25,8 +25,15 @@ def register_user(email, password, address=None, phone=None):
     print(f"User phone: {phone}")
 # register_user("robert@gmail.com", "testpas123", address="Budapest")
 
-# arbitrary number arguments
+# arbitrary length arguments
 def print_all_params(*args):
     for i in args:
         print(i)
 # print_all_params("Robert", "Budapest", 3.14, ["apple", "banana"], True)
+
+
+# arbitrary length keyword arguments
+def print_all_keyword_params(**kwargs):
+    print(type(kwargs))
+    print(kwargs)
+# print_all_keyword_params(name="Robert", age=12, address="Budapest")

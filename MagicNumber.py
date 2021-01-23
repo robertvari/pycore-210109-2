@@ -1,5 +1,7 @@
 import random
 
+USER_CREDITS = 0
+
 
 def main():
     print("-"*50, "Magic Number", "-"*50)
@@ -22,15 +24,34 @@ def menu():
 
 def game():
     magic_number = random.randint(0, 10)
+    print(f"DEBUG: {magic_number}")
     max_tries = 3
 
     user_number = get_user_number()
+
+    while user_number != magic_number:
+        max_tries -= 1
+        if max_tries == 0:
+            print("You lost the game")
+            main()
+
+        print(f"Wrong number. You have {max_tries} more tries.")
+        user_number = get_user_number()
+
+    print(f"You win! My number was {magic_number}")
+    main()
 
 
 def get_user_number() -> int:
     user_number = int(input("Your number?"))
     return user_number
 
+
+def update_credits(value):
+    global USER_CREDITS
+    USER_CREDITS += value
+
+    print(f"Your credits: {USER_CREDITS}")
 
 if __name__ == '__main__':
     main()

@@ -49,6 +49,10 @@ def game():
     main()
 
 
+def shop():
+    pass
+
+
 def get_user_number() -> int:
     user_number = int(input("Your number?"))
     return user_number

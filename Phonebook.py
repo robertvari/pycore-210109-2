@@ -36,7 +36,10 @@ def ask_user(phonebook_data):
 
 
 def save_phonebook(updated_phonebook):
-    pass
+    with open(DATA_FILE, "w") as f:
+        json.dump(updated_phonebook, f)
+
+    print("Data saved!")
 
 
 if __name__ == '__main__':

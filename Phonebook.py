@@ -4,14 +4,29 @@ DATA_FILE = "phonebook.json"
 
 
 def main():
-    # get phonebook data from file if exists
-    phonebook_data = get_phonebook_data()
+    menu()
 
-    # get new data from user
-    updated_phonebook = ask_user(phonebook_data)
 
-    # save/update phonebook
-    save_phonebook(updated_phonebook)
+def menu():
+    menu_string = "1. Add new phone number.\n2. Exit"
+    print(menu_string)
+
+    user_input = input()
+
+    if user_input == "1":
+        # get phonebook data from file if exists
+        phonebook_data = get_phonebook_data()
+
+        # get new data from user
+        updated_phonebook = ask_user(phonebook_data)
+
+        # save/update phonebook
+        save_phonebook(updated_phonebook)
+
+        menu()
+    else:
+        print("Goodbye!")
+        exit()
 
 
 def get_phonebook_data() -> dict:

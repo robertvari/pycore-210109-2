@@ -23,7 +23,16 @@ def get_phonebook_data() -> dict:
 
 
 def ask_user(phonebook_data):
-    return {}
+    name = input("Name:")
+    address = input("Address:")
+    phone = input("Phone:")
+
+    phonebook_data[phone] = {
+        "name": name,
+        "address": address
+    }
+
+    return phonebook_data
 
 
 def save_phonebook(updated_phonebook):

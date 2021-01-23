@@ -23,5 +23,10 @@ def register_user(email, password, address=None, phone=None):
     print(f"User password: {password}")
     print(f"User address: {address}")
     print(f"User phone: {phone}")
-
 # register_user("robert@gmail.com", "testpas123", address="Budapest")
+
+# arbitrary number arguments
+def print_all_params(*args):
+    for i in args:
+        print(i)
+# print_all_params("Robert", "Budapest", 3.14, ["apple", "banana"], True)

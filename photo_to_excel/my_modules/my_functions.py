@@ -1,5 +1,6 @@
 import os
 from PIL import Image, ExifTags
+from openpyxl import Workbook
 
 
 def get_root_path():
@@ -45,9 +46,22 @@ def get_photo_data(file_path):
 
 
 def write_data_to_excel(root_folder, photo_data_list):
-    pass
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet["A1"] = "Name"
+    sheet["B1"] = "Date"
+    sheet["C1"] = "Dimensions"
+
+    for index, data in enumerate(photo_data_list):
+        row = index + 3
+        sheet[f"A{row}"] = data.get('Name')
+        sheet[f"B{row}"] = data.get('Date')
+        sheet[f"C{row}"] = data.get('Dimensions')
+
+    excel_file = os.path.join(root_folder, "photo_data.xlsx")
+    workbook.save(excel_file)
 
 
 if __name__ == '__main__':
-    image_data = get_photo_data("D:\\Photos\\CIW\\IMG_1100.JPG")
-    print(image_data)
+    photo_data_list = [{'Name': 'IMG_1069.JPG', 'Dimensions': '2592x1728', 'Date': '2016:08:20 09:19:06'}, {'Name': 'IMG_1070.JPG', 'Dimensions': '2592x1728', 'Date': '2016:08:20 09:19:20'}]
+    write_data_to_excel("D:\\Photos\\CIW", photo_data_list)

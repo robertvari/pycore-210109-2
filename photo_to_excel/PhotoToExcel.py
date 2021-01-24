@@ -1,4 +1,5 @@
-from my_modules.my_functions import get_root_path, get_photo_files, get_photo_data
+from my_modules.my_functions import get_root_path, get_photo_files, get_photo_data, \
+    write_data_to_excel
 
 
 def main():
@@ -10,6 +11,9 @@ def main():
 
     # collect data from images
     photo_data_list = [get_photo_data(i) for i in photos]
+
+    # save data to excel
+    write_data_to_excel(root_folder, photo_data_list)
 
 
 if __name__ == '__main__':

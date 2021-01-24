@@ -44,6 +44,10 @@ def get_photo_data(file_path):
     return image_data
 
 
+def write_data_to_excel(root_folder, photo_data_list):
+    pass
+
+
 if __name__ == '__main__':
     image_data = get_photo_data("D:\\Photos\\CIW\\IMG_1100.JPG")
     print(image_data)

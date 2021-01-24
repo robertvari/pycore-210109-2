@@ -13,6 +13,10 @@ def main():
     for i in photo_files:
         job_queue.put({"path": i, "text": watermark_text})
 
+    for _ in range(6):
+        t = threading.Thread(target=watermark_worker)
+        t.start()
+
 
 def get_photo_files(folder_path):
     photo_list = [
@@ -33,6 +37,8 @@ def watermark_worker():
             os.makedirs(save_folder)
 
         photo_path = job_data["path"]
+        print(f"Working on {photo_path}...")
+
         watermark_text = job_data["text"]
 
         image_name = os.path.basename(photo_path)

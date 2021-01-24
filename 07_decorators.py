@@ -1,20 +1,9 @@
 import time, random
-
-
-def my_timer(func):
-
-    def wrapper(*args, **kwargs):
-        print("my_timer started!")
-        start_time = time.time()
-
-        result = func(*args, **kwargs)
-
-        print(f"Runtime: {time.time() - start_time}")
-
-    return wrapper
+from my_modules.decorators import my_timer, my_logger
 
 
 @my_timer
+@my_logger
 def worker1(name, age):
     time.sleep(random.randint(1, 10))
     print(f"Hello {name}. You are {age} old")

@@ -1,5 +1,7 @@
-import os
+import os, queue, threading
 from PIL import Image, ImageDraw, ImageFont
+
+job_queue = queue.Queue()
 
 
 def main():
@@ -7,7 +9,9 @@ def main():
     watermark_text = "Hello World"
 
     photo_files = get_photo_files(folder_path)
-    watermark_images(photo_files, watermark_text)
+
+    for i in photo_files:
+        job_queue.put({"path": i, "text": watermark_text})
 
 
 def get_photo_files(folder_path):
@@ -19,13 +23,18 @@ def get_photo_files(folder_path):
     return photo_list
 
 
-def watermark_images(photo_files, watermark_text):
-    root_dir = os.path.dirname(photo_files[0])
-    save_folder = os.path.join(root_dir, "_watermarked")
-    if not os.path.exists(save_folder):
-        os.makedirs(save_folder)
+def watermark_worker():
+    while not job_queue.empty():
+        job_data = job_queue.get()
 
-    for photo_path in photo_files:
+        root_dir = os.path.dirname(job_data["path"])
+        save_folder = os.path.join(root_dir, "_watermarked")
+        if not os.path.exists(save_folder):
+            os.makedirs(save_folder)
+
+        photo_path = job_data["path"]
+        watermark_text = job_data["text"]
+
         image_name = os.path.basename(photo_path)
         img = Image.open(photo_path)
         img.thumbnail((800, 800))

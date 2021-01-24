@@ -7,7 +7,6 @@ def main():
 
     # list jpg files in path
     photos = get_photo_files(root_folder)
-    print(photos)
 
 
 if __name__ == '__main__':
